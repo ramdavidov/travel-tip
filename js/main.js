@@ -26,19 +26,19 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
 document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
     // console.log('My location btn pressed', ev.target)
     locService.getPosition()
-    .then(() => {
-        locService.getPosition()
-            // getPosition is a PROMISE!
-            .then(pos => {
-                mapService.panTo(pos.coords.latitude, pos.coords.longitude)
-                mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude })
-                // getWeather is a PROMISE!
-                weatherService.getWeather(pos.coords)
-                    .then(weather => {
-                        renderWeather(weather)
-                    })
-            })
-    })
+        .then(() => {
+            locService.getPosition()
+                // getPosition is a PROMISE!
+                .then(pos => {
+                    mapService.panTo(pos.coords.latitude, pos.coords.longitude)
+                    mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude })
+                    // getWeather is a PROMISE!
+                    weatherService.getWeather(pos.coords)
+                        .then(weather => {
+                            renderWeather(weather)
+                        })
+                })
+        })
 })
 
 
