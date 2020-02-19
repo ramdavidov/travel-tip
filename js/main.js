@@ -1,4 +1,4 @@
-console.log('Main!');
+console.log('Main! + Ignore!!!!');
 
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
