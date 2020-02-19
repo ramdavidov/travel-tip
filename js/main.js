@@ -1,5 +1,5 @@
 console.log('Main! + Ignore!!!!');
-
+import { weatherService } from './services/weather.service.js'
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 import { utilsService } from './services/utils.service.js'
