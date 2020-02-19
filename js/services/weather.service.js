@@ -56,22 +56,16 @@ function getWeather(coords) {
             let minTemp = weatherDetails.main.temp_min
             let maxTemp = weatherDetails.main.temp_max
             let windSpeed = weatherDetails.wind.speed
-            var weather = createWeather(name, country, desc, temp, minTemp, maxTemp, windSpeed)
+            let imgCode = weatherDetails.weather[0].icon
+            var weather = createWeather(name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode)
             console.log(weather);
             return weather;
         })
 
 }
 
-function convertKalvToCel(deg) {
-    return parseInt(deg - 273.15);
-}
 
-function convertMilToKm(speed) {
-    return parseInt(speed * 1.609);
-}
-
-function createWeather(name, country, desc, temp, minTemp, maxTemp, windSpeed) {
-    var weather = { name, country, desc, temp, minTemp, maxTemp, windSpeed };
+function createWeather(name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode) {
+    var weather = { name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode };
     return weather;
 }
