@@ -6,17 +6,18 @@ export const weatherService = {
 
 }
 
-
-window.KEYS = KEYS
-
 var eilatCoords = { latitude: 29.55805, longitude: 34.94821 }
 
 function getWeather(coords) {
-    var lat = coords.latitude
-    var lon = coords.longitude
+    if (coords.lat && coords.lng) {
+        var lat = coords.lat
+        var lon = coords.lng
+    } else {
+        var lat = coords.latitude
+        var lon = coords.longitude
 
-
-
+    }
+    
     return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=${KEYS.weather}`)
         .then(res => {
             const weatherDetails = res.data
@@ -29,7 +30,6 @@ function getWeather(coords) {
             let windSpeed = weatherDetails.wind.speed
             let imgCode = weatherDetails.weather[0].icon
             var weather = createWeather(name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode)
-            console.log(weather);
             return weather;
         })
 

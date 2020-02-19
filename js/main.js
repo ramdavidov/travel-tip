@@ -1,30 +1,33 @@
-console.log('Main! + Ignore!!!!');
 import { weatherService } from './services/weather.service.js'
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
-import { utilsService } from './services/utils.service.js'
 
-
-locService.getLocs()
-    .then(locs => console.log('locs', locs))
 
 window.onload = () => {
-    mapService.initMap()
-        .then(() => {
-            mapService.addMarker({ lat: 29.5577, lng: 34.9519 });
+    // debugger
+    locService.getLocs()
+        .then(locs => {
+            const lat = locs[0].lat
+            const lng = locs[0].lng
+            mapService.initMap(lat, lng)
+                .then(() => {
+                    mapService.addMarker(locs[0])
+                    weatherService.getWeather(locs[0])
+                        .then(weather => {
+                            renderWeather(weather)
+                        })
+                })
+                .catch(err => {
+                    console.log('INIT MAP ERROR', err)
+                })
         })
-        .catch(err => {
-            console.log('INIT MAP ERROR', err)
-        });
 }
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
-    // console.log('Aha!', ev.target);
     mapService.panTo(35.6895, 139.6917);
 })
 
 document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
-    // console.log('My location btn pressed', ev.target)
     locService.getPosition()
         .then(() => {
             locService.getPosition()
@@ -36,6 +39,9 @@ document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
                     weatherService.getWeather(pos.coords)
                         .then(weather => {
                             renderWeather(weather)
+                        })
+                        .catch(err => {
+                            console.log('USERPOSITION ERROR', err)
                         })
                 })
         })
@@ -54,13 +60,13 @@ function renderWeather(weather) {
 }
 
 
-function onAddressEntered(){
+function onAddressEntered() {
     var elAddressInput = document.querySelector('.address-input')
     var address = elAddressInput.value
     getCoordsAndAddress(address)
     elAddressInput.value = ''
 }
 
-function renderAddress(address){
+function renderAddress(address) {
     document.querySelector('.address-name').innerText = address
 }

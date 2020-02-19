@@ -1,13 +1,19 @@
 import { KEYS } from '../../ignore/api-keys.js'
+import { utilsService } from './utils.service.js'
 export const locService = {
     getLocs,
     getPosition,
 
 }
 
-var locs = [{ lat: 11.22, lng: 22.11 }]
+var locs = [{ lat: 29.5577, lng: 34.9519 }]
+
 
 function getLocs() {
+    const lat = +utilsService.getParameterByName('lat')
+    const lng = +utilsService.getParameterByName('lng')
+
+    if (lat && lng) locs = [{ lat, lng }]
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(locs);
@@ -15,13 +21,9 @@ function getLocs() {
     });
 }
 
-
 function getPosition() {
-    console.log('Getting Pos');
-
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
-
     })
 }
 

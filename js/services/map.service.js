@@ -4,7 +4,6 @@ export const mapService = {
     addMarker,
     panTo,
     getMap,
-    centerMap,
 }
 
 var map;
@@ -19,7 +18,6 @@ function initMap(lat = 29.5577, lng = 34.9519) {
                 center: { lat, lng },
                 zoom: 15
             })
-            console.log('Map!', map);
         })
 }
 
@@ -40,35 +38,6 @@ function panTo(lat, lng) {
 function getMap() {
     return map
 }
-
-function centerMap(map, lat, lng) {
-    console.log('MAP', map)
-    console.log('LAT', lat)
-    console.log('LNG', lng)
-    map.setCenter({ lat: lat, lng: lng });
-    map.setZoom(14);
-}
-
-// function getUserCurrPos() {
-//     console.log('STARTEDDDDD!')
-//     if (!navigator.geolocation) {
-//         alert("HTML5 Geolocation is not supported in your browser.");
-//         return;
-//     }
-//     // One shot position getting or continus watch
-//     navigator.geolocation.getCurrentPosition(_showLocation, _handleLocationError)
-//     // navigator.geolocation.watchPosition(showLocation, handleLocationError);
-// }
-
-// function _showLocation(position) {
-//     console.log(position)
-//     initMap(position.coords.latitude, position.coords.longitude);
-// }
-
-// function _handleLocationError(error) {
-//     error = 'ERROR-handleLocationError'
-//     console.log(error)
-// }
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
