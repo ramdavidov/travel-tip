@@ -32,3 +32,8 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
     mapService.panTo(35.6895, 139.6917);
 })
+
+document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
+    console.log('My location btn pressed', ev.target)
+    mapService.getUserCurrPos()
+})
