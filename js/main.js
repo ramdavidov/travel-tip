@@ -1,5 +1,5 @@
 console.log('Main!');
-
+console.log('ma kore rami hakol beseder?')
 import locService from './services/loc.service.js'
 import mapService from './services/map.service.js'
 
