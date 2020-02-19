@@ -20,9 +20,14 @@ window.onload = () => {
             locService.getPosition()
                 // getPosition is a PROMISE!
                 .then(pos => {
-                    weatherService.getWeather(pos.coords)
+                    mapService.panTo(pos.coords.latitude, pos.coords.latitude)
+                    mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.latitude })
                     // getWeather is a PROMISE!
-                    mapService.panTo(pos.coords.latitude, pos.coords.longitude)
+                    weatherService.getWeather(pos.coords)
+                        .then(weather => {
+                            console.log(weather);
+                            renderWeather(weather)
+                        })
                 })
         })
         .catch(err => {
@@ -50,7 +55,7 @@ document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
 function renderWeather(weather) {
     const strHTMLs = `
     <h2>Weather Today</h2>
-    <img src="http://openweathermap.org/img/wn/${weather.imageCode}.png">
+    <img src="http://openweathermap.org/img/wn/${weather.imgCode}.png">
     <p>${weather.name},${weather.country} ${weather.desc}</p>
     <p>${weather.temp}°C temperature from ${weather.minTemp} to ${weather.maxTemp}°C, wind ${weather.windSpeed} m/s </p>
    `;
