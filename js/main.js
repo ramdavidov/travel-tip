@@ -10,29 +10,12 @@ locService.getLocs()
 
 window.onload = () => {
     mapService.initMap()
-        // .then(() => {
-        //     mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-        // })
-        // .catch(err => {
-        //     console.log('INIT MAP ERROR', err)
-        // });
         .then(() => {
-            locService.getPosition()
-                // getPosition is a PROMISE!
-                .then(pos => {
-                    mapService.panTo(pos.coords.latitude, pos.coords.latitude)
-                    mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.latitude })
-                    // getWeather is a PROMISE!
-                    weatherService.getWeather(pos.coords)
-                        .then(weather => {
-                            console.log(weather);
-                            renderWeather(weather)
-                        })
-                })
+            mapService.addMarker({ lat: 29.5577, lng: 34.9519 });
         })
         .catch(err => {
-            console.log('err!!!', err);
-        })
+            console.log('INIT MAP ERROR', err)
+        });
 }
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
@@ -43,11 +26,19 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
 document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
     // console.log('My location btn pressed', ev.target)
     locService.getPosition()
-        .then(pos => {
-            mapService.initMap(pos.coords.latitude, pos.coords.longitude)
-            weatherService.getWeather(pos.coords)
-            // Next is render weather
-        })
+    .then(() => {
+        locService.getPosition()
+            // getPosition is a PROMISE!
+            .then(pos => {
+                mapService.panTo(pos.coords.latitude, pos.coords.longitude)
+                mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude })
+                // getWeather is a PROMISE!
+                weatherService.getWeather(pos.coords)
+                    .then(weather => {
+                        renderWeather(weather)
+                    })
+            })
+    })
 })
 
 
