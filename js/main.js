@@ -11,7 +11,6 @@ locService.getLocs()
 window.onload = () => {
     mapService.initMap()
         .then(() => {
-
             mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
         .catch(err => {
@@ -19,23 +18,32 @@ window.onload = () => {
         });
 
     locService.getPosition()
+        // getPosition is a PROMISE!
         .then(pos => {
-            console.log('User position is:', pos.coords);
-            let x = weatherService.getWeather(pos.coords)
-            console.log(x)
+            // Pan to:
+            mapService.panTo(pos.coords.latitude, pos.coords.longitude)
+            // mapService.addMarker(pos.coords)
+            // getWeather is a PROMISE!
+            weatherService.getWeather(pos.coords)
+            // console.log('User position is:', pos.coords);
+            // return pos
         })
-        // .then(res => )
         .catch(err => {
             console.log('err!!!', err);
         })
 }
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
-    console.log('Aha!', ev.target);
+    // console.log('Aha!', ev.target);
     mapService.panTo(35.6895, 139.6917);
 })
 
 document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
-    console.log('My location btn pressed', ev.target)
-    mapService.getUserCurrPos()
+    // console.log('My location btn pressed', ev.target)
+    locService.getPosition()
+        .then(pos => {
+            mapService.initMap(pos.coords.latitude, pos.coords.longitude)
+            weatherService.getWeather(pos.coords)
+            // Next is render weather
+        })
 })

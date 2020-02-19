@@ -4,9 +4,6 @@ export const locService = {
     
 }
 
-
-
-
 var locs = [{ lat: 11.22, lng: 22.11 }]
 
 function getLocs() {
@@ -23,6 +20,7 @@ function getPosition() {
 
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
+        
     })
 }
 
