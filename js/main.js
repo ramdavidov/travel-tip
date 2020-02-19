@@ -10,23 +10,20 @@ locService.getLocs()
 
 window.onload = () => {
     mapService.initMap()
+        // .then(() => {
+        //     mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+        // })
+        // .catch(err => {
+        //     console.log('INIT MAP ERROR', err)
+        // });
         .then(() => {
-            mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-        })
-        .catch(err => {
-            console.log('INIT MAP ERROR', err)
-        });
-
-    locService.getPosition()
-        // getPosition is a PROMISE!
-        .then(pos => {
-            // Pan to:
-            mapService.panTo(pos.coords.latitude, pos.coords.longitude)
-            // mapService.addMarker(pos.coords)
-            // getWeather is a PROMISE!
-            weatherService.getWeather(pos.coords)
-            // console.log('User position is:', pos.coords);
-            // return pos
+            locService.getPosition()
+                // getPosition is a PROMISE!
+                .then(pos => {
+                    weatherService.getWeather(pos.coords)
+                    // getWeather is a PROMISE!
+                    mapService.panTo(pos.coords.latitude, pos.coords.longitude)
+                })
         })
         .catch(err => {
             console.log('err!!!', err);
