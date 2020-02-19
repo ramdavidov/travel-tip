@@ -52,3 +52,15 @@ function renderWeather(weather) {
    `;
     document.querySelector('.weather-container').innerHTML = strHTMLs;
 }
+
+
+function onAddressEntered(){
+    var elAddressInput = document.querySelector('.address-input')
+    var address = elAddressInput.value
+    getCoordsAndAddress(address)
+    elAddressInput.value = ''
+}
+
+function renderAddress(address){
+    document.querySelector('.address-name').innerText = address
+}
