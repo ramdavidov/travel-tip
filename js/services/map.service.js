@@ -1,12 +1,13 @@
+import { KEYS } from '../../ignore/api-keys.js'
 export const mapService = {
     initMap,
     addMarker,
     panTo,
+    getUserCurrPos,
 
 }
 
 var map;
-const gMapKey = 'AIzaSyDqm1BhYgQEMWTG8_iY0uw0rbjQ9cG4_e8'
 
 
 
@@ -38,11 +39,32 @@ function panTo(lat, lng) {
     map.panTo(laLatLng);
 }
 
+function getUserCurrPos() {
+    console.log('STARTEDDDDD!')
+    if (!navigator.geolocation) {
+        alert("HTML5 Geolocation is not supported in your browser.");
+        return;
+    }
+    // One shot position getting or continus watch
+    navigator.geolocation.getCurrentPosition(_showLocation, _handleLocationError)
+    // navigator.geolocation.watchPosition(showLocation, handleLocationError);
+}
+
+function _showLocation(position) {
+    console.log(position)
+    initMap(position.coords.latitude, position.coords.longitude);
+}
+
+function _handleLocationError(error) {
+    error = 'ERROR-handleLocationError'
+    console.log(error)
+}
+
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
     const API_KEY = ''; //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script');
-    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${gMapKey}`;
+    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${KEYS.googleMaps}`;
     elGoogleApi.async = true;
     document.body.append(elGoogleApi);
 
