@@ -6,7 +6,7 @@ export const mapService = {
 }
 
 var map;
-
+const gMapKey = 'AIzaSyDqm1BhYgQEMWTG8_iY0uw0rbjQ9cG4_e8'
 
 
 
@@ -42,7 +42,7 @@ function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
     const API_KEY = ''; //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script');
-    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
+    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${gMapKey}`;
     elGoogleApi.async = true;
     document.body.append(elGoogleApi);
 
