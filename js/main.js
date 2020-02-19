@@ -20,9 +20,11 @@ window.onload = () => {
 
     locService.getPosition()
         .then(pos => {
-
             console.log('User position is:', pos.coords);
+            let x = weatherService.getWeather(pos.coords)
+            console.log(x)
         })
+        // .then(res => )
         .catch(err => {
             console.log('err!!!', err);
         })
