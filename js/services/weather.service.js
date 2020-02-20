@@ -1,12 +1,12 @@
 'use strict';
 import { KEYS } from '../../ignore/api-keys.js'
 export const weatherService = {
-    eilatCoords,
+    // eilatCoords,
     getWeather,
 
 }
 
-var eilatCoords = { latitude: 29.55805, longitude: 34.94821 }
+// var eilatCoords = { latitude: 29.55805, longitude: 34.94821 }
 
 function getWeather(coords) {
     if (coords.lat && coords.lng) {
@@ -29,14 +29,14 @@ function getWeather(coords) {
             let maxTemp = weatherDetails.main.temp_max
             let windSpeed = weatherDetails.wind.speed
             let imgCode = weatherDetails.weather[0].icon
-            var weather = createWeather(name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode)
+            var weather = { name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode }
             return weather;
         })
 
 }
 
 
-function createWeather(name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode) {
-    var weather = { name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode };
-    return weather;
-}
+// function createWeather(name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode) {
+//     var weather = { name, country, desc, temp, minTemp, maxTemp, windSpeed, imgCode };
+//     return weather;
+// }
