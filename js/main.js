@@ -4,7 +4,6 @@ import { mapService } from './services/map.service.js'
 
 
 window.onload = () => {
-    // debugger
     locService.getLocs()
         .then(locs => {
             const lat = locs.lat
@@ -72,19 +71,17 @@ document.querySelector('.go-to-btn').addEventListener('click', (ev) => {
 
 
 function onCopyPosUrl() {
-    let locs = locService.getLocs()
+    locService.getLocs()
         .then(locs => {
             const lat = locs.lat
             const lng = locs.lng
-            console.log('LAT:', lat, 'LNG:', lng)
+            const copyText = document.querySelector('.copy-loc-txt')
+            const url = window.location.href
+            copyText.value = url+`?lat=${lat}&lng=${lng}`
+            copyText.select()
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand('copy')
         })
-    /* Get the text field */
-    //   const copyText = document.querySelector('.copy-loc-txt')
-    //   /* Select the text field */
-    //   copyText.select();
-    //   copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-    //   /* Copy the text inside the text field */
-    //   document.execCommand("copy");
 }
 
 function renderWeather(weather) {
