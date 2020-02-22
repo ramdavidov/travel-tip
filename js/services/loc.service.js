@@ -3,7 +3,7 @@ import { utilsService } from './utils.service.js'
 export const locService = {
     getLocs,
     getPosition,
-
+    getCoordsAndAddress
 }
 
 var locs = [{ lat: 29.5577, lng: 34.9519 }]
