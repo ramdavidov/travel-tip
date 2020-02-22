@@ -9,16 +9,18 @@ export const weatherService = {
 // var eilatCoords = { latitude: 29.55805, longitude: 34.94821 }
 
 function getWeather(coords) {
+    var lat;
+    var lng;
     if (coords.lat && coords.lng) {
-        var lat = coords.lat
-        var lon = coords.lng
+        lat = coords.lat
+        lng = coords.lng
     } else {
-        var lat = coords.latitude
-        var lon = coords.longitude
+        lat = coords.latitude
+        lng = coords.longitude
 
     }
-    
-    return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=${KEYS.weather}`)
+
+    return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&APPID=${KEYS.weather}`)
         .then(res => {
             const weatherDetails = res.data
             let name = weatherDetails.name
