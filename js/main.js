@@ -48,6 +48,10 @@ document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
 })
 
 
+document.querySelector('.go-to-btn').addEventListener('click', (ev) => {
+    onAddressEntered()
+})
+
 
 function renderWeather(weather) {
     const strHTMLs = `
@@ -62,11 +66,22 @@ function renderWeather(weather) {
 
 function onAddressEntered() {
     var elAddressInput = document.querySelector('.address-input')
-    var address = elAddressInput.value
-    getCoordsAndAddress(address)
+    var addressEntered = elAddressInput.value
+    locService.getCoordsAndAddress(addressEntered)
+    .then(addressDetails => {
+        renderAddressText(addressDetails.addressLiteral)
+        mapService.panTo(addressDetails.addressCordinates.lat, addressDetails.addressCordinates.lng)
+        mapService.addMarker(addressDetails.addressCordinates)
+
+        return weatherService.getWeather(addressDetails.addressCordinates)
+    })
+    .then(weather => {
+        renderWeather(weather)
+    })
     elAddressInput.value = ''
 }
 
-function renderAddress(address) {
+function renderAddressText(address) {
     document.querySelector('.address-name').innerText = address
 }
+
