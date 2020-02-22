@@ -50,7 +50,6 @@ function getCoordsAndAddress(address) {
 function getLocNameFromLocs(locs){
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${locs.lat},${locs.lng}&key=${KEYS.googleMaps}`)
     .then(res => {
-        console.log('address name:',res.data.results[0].formatted_address);
         return {            
             addressName: res.data.results[0].formatted_address
         }

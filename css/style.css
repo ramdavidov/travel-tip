@@ -67,3 +67,7 @@ button{
     font-weight: bold;
     
 }
+
+.copy-loc-txt {
+   opacity: 0;
+}
