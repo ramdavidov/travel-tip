@@ -30,9 +30,7 @@ window.onload = () => {
         })
 }
 
-document.querySelector('.btn').addEventListener('click', (ev) => {
-    mapService.panTo(35.6895, 139.6917);
-})
+
 
 document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
     locService.getPosition()
@@ -93,7 +91,7 @@ function renderWeather(weather) {
     const strHTMLs = `
     <h2>Weather Today</h2>
     <img src="http://openweathermap.org/img/wn/${weather.imgCode}.png">
-    <p>${weather.name},${weather.country} ${weather.desc}</p>
+    <p>${weather.name}, ${weather.country} ${weather.desc}</p>
     <p>${weather.temp}°C temperature from ${weather.minTemp} to ${weather.maxTemp}°C, wind ${weather.windSpeed} m/s </p>`;
     document.querySelector('.weather-container').innerHTML = strHTMLs;
 }

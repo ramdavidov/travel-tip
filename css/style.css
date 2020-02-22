@@ -1,3 +1,69 @@
+html{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(253, 165, 0);
+}
+
 body{
-    background-color: salmon;
+    background-color: rgb(52, 52, 141);
+
+}
+
+button{
+    cursor: pointer;
+}
+
+.main-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.logo{
+    font-size: 3rem;
+}
+
+.selected-loc{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+}
+
+ .main-nav button, .main-nav input{
+ font-size: 1.5rem;
+ padding: 10px;
+}
+
+.selected-loc button{
+    font-size: 0.8em;
+    padding: 5px;
+}
+
+.weather-map-container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+
+
+.address-name{
+    font-size: 2rem;
+}
+
+#map{
+    width: 500px; height: 400px;
+}
+
+.weather-container{
+    background-color: #2196F3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35%;
+    border-radius: 0.7rem;
+    font-weight: bold;
+    
 }
