@@ -47,26 +47,46 @@ document.querySelector('.my-loc-btn').addEventListener('click', (ev) => {
         })
 })
 
+document.querySelector('.copy-loc-btn').addEventListener('click', (ev) => {
+    onCopyPosUrl()
+})
 
+
+
+function onCopyPosUrl() {
+    let locs = locService.getLocs()
+        .then(locs => {
+            const lat = locs[0].lat
+            const lng = locs[0].lng
+            console.log('LAT:', lat, 'LNG:', lng)
+        })
+            /* Get the text field */
+            //   const copyText = document.querySelector('.copy-loc-txt')
+            //   /* Select the text field */
+            //   copyText.select();
+            //   copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+            //   /* Copy the text inside the text field */
+            //   document.execCommand("copy");
+        }
 
 function renderWeather(weather) {
-    const strHTMLs = `
+                const strHTMLs = `
     <h2>Weather Today</h2>
     <img src="http://openweathermap.org/img/wn/${weather.imgCode}.png">
     <p>${weather.name},${weather.country} ${weather.desc}</p>
     <p>${weather.temp}°C temperature from ${weather.minTemp} to ${weather.maxTemp}°C, wind ${weather.windSpeed} m/s </p>
    `;
-    document.querySelector('.weather-container').innerHTML = strHTMLs;
-}
+                document.querySelector('.weather-container').innerHTML = strHTMLs;
+            }
 
 
 function onAddressEntered() {
-    var elAddressInput = document.querySelector('.address-input')
-    var address = elAddressInput.value
-    getCoordsAndAddress(address)
-    elAddressInput.value = ''
-}
+                var elAddressInput = document.querySelector('.address-input')
+                var address = elAddressInput.value
+                getCoordsAndAddress(address)
+                elAddressInput.value = ''
+            }
 
 function renderAddress(address) {
-    document.querySelector('.address-name').innerText = address
-}
+                document.querySelector('.address-name').innerText = address
+            }
